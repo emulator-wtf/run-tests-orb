@@ -84,7 +84,7 @@ steps:
         WITH_COVERAGE: <<parameters.with_coverage>>
         ADDITIONAL_APKS: <<parameters.additional_apks>>
         ENVIRONMENT_VARIABLES: <<parameters.environment_variables>>
-        NUM_UNIFORM_SHARDS: <<parameters.num_unform_shards>>
+        NUM_UNIFORM_SHARDS: <<parameters.num_uniform_shards>>
         NUM_SHARDS: <<parameters.num_shards>>
         DIRECTORIES_TO_PULL: <<parameters.directories_to_pull>>
       name: Run tests with emulator.wtf

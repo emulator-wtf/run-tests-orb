@@ -1,7 +1,5 @@
 EW_BIN="$HOME/.cache/emulator-wtf/ew-cli"
 
-"$EW_BIN" --version
-
 args=($EW_BIN)
 
 if [[ ! -z "$APP_APK" ]]; then
@@ -22,15 +20,15 @@ if [[ ! -z "$DEVICES" ]]; then
     done
 fi
 
-if [[ "$USE_ORCHESTRATOR" == "true" ]]; then
+if [[ "$USE_ORCHESTRATOR" == "1" ]]; then
     args+=("--use-orchestrator")
 fi
 
-if [[ "$CLEAR_PACKAGE_DATA" == "true" ]]; then
+if [[ "$CLEAR_PACKAGE_DATA" == "1" ]]; then
     args+=("--clear-package-data")
 fi
 
-if [[ "$WITH_COVERAGE" == "true" ]]; then
+if [[ "$WITH_COVERAGE" == "1" ]]; then
     args+=("--with-coverage")
 fi
 
@@ -63,6 +61,8 @@ if [[ ! -z "$DIRECTORIES_TO_PULL" ]]; then
         args+=("--directories-to-pull" "$dirtopull")
     done <<< "$DIRECTORIES_TO_PULL"
 fi
+
+echo "${args[@]}"
 
 # execute
 "${args[@]}"
