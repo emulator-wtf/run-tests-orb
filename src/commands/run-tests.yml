@@ -1,7 +1,7 @@
 description: >
   Run Android instrumentation tests using emulator.wtf.
 parameters:
-  cache_version:
+  cache-version:
     type: string
     default: "1"
     description: "cache version, change this in case of cache corruption"
@@ -15,7 +15,7 @@ parameters:
   test:
     type: string
     description: "Path to test apk file"
-  outputs_dir:
+  outputs-dir:
     type: string
     description: "Location to store test outputs in"
     default: ""
@@ -23,35 +23,35 @@ parameters:
     type: string
     description: "Device configurations to use, in the form of model=X,version=Y per line"
     default: ""
-  use_orchestrator:
+  use-orchestrator:
     type: boolean
     description: "Whether to use the Android Test Orchestrator"
     default: false
-  clear_package_data:
+  clear-package-data:
     type: boolean
-    description: "Whether to clear app data between every test (requires use_orchestrator)"
+    description: "Whether to clear app data between every test (requires use-orchestrator)"
     default: false
-  with_coverage:
+  with-coverage:
     type: boolean
     description: "Set to true to collect coverage files and save them to outputs-dir"
     default: false
-  additional_apks:
+  additional-apks:
     type: string
     description: "Additional apks to install, one per line"
     default: ""
-  environment_variables:
+  environment-variables:
     type: string
     description: "Environment variables to pass to AndroidJUnitRunner, comma-separated list of key-value pairs: key=value,key2=value2"
     default: ""
-  num_uniform_shards:
+  num-uniform-shards:
     type: integer
     description: "Set to a number larger than 1 to randomly split your tests into multiple shards to be executed in parallel"
     default: 0
-  num_shards:
+  num-shards:
     type: integer
     description: "Set to a number larger than 1 to randomly split your tests into multiple shards to be executed in parallel"
     default: 0
-  directories_to_pull:
+  directories-to-pull:
     type: string
     description: "Directories to pull from device and store in outputs-dir, one per line"
     default: ""
@@ -59,8 +59,8 @@ steps:
   # restore the wrapping script and jar cache
   - restore_cache:
       keys:
-          - ew-cli-<<parameters.cache_version>>-<<parameters.version>>
-          - ew-cli-<<parameters.cache_version>>
+          - ew-cli-<<parameters.cache-version>>-<<parameters.version>>
+          - ew-cli-<<parameters.cache-version>>
   # make sure ew-cli and the jar exists
   - run:
       environment:
@@ -69,7 +69,7 @@ steps:
       command: <<include(scripts/download.sh)>>
   # store the wrapping script and jar cache
   - save_cache:
-      key: ew-cli-<<parameters.cache_version>>-<<parameters.version>>
+      key: ew-cli-<<parameters.cache-version>>-<<parameters.version>>
       paths: ~/.cache/emulator-wtf
   # invoke ew-cli
   - run:
@@ -77,15 +77,15 @@ steps:
         EW_VERSION: <<parameters.version>>
         APP_APK: <<parameters.app>>
         TEST_APK: <<parameters.test>>
-        OUTPUTS_DIR: <<parameters.outputs_dir>>
+        OUTPUTS_DIR: <<parameters.outputs-dir>>
         DEVICES: <<parameters.devices>>
-        USE_ORCHESTRATOR: <<parameters.use_orchestrator>>
-        CLEAR_PACKAGE_DATA: <<parameters.clear_package_data>>
-        WITH_COVERAGE: <<parameters.with_coverage>>
-        ADDITIONAL_APKS: <<parameters.additional_apks>>
-        ENVIRONMENT_VARIABLES: <<parameters.environment_variables>>
-        NUM_UNIFORM_SHARDS: <<parameters.num_uniform_shards>>
-        NUM_SHARDS: <<parameters.num_shards>>
-        DIRECTORIES_TO_PULL: <<parameters.directories_to_pull>>
+        USE_ORCHESTRATOR: <<parameters.use-orchestrator>>
+        CLEAR_PACKAGE_DATA: <<parameters.clear-package-data>>
+        WITH_COVERAGE: <<parameters.with-coverage>>
+        ADDITIONAL_APKS: <<parameters.additional-apks>>
+        ENVIRONMENT_VARIABLES: <<parameters.environment-variables>>
+        NUM_UNIFORM_SHARDS: <<parameters.num-uniform-shards>>
+        NUM_SHARDS: <<parameters.num-shards>>
+        DIRECTORIES_TO_PULL: <<parameters.directories-to-pull>>
       name: Run tests with emulator.wtf
       command: <<include(scripts/run.sh)>>
