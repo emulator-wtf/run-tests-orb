@@ -52,7 +52,7 @@ fi
 
 if [[ -n "$NUM_SHARDS" ]]; then
     if [[ "$NUM_SHARDS" != "0" ]]; then
-        args+=("--num-uniform-shards" "$NUM_SHARDS")
+        args+=("--num-shards" "$NUM_SHARDS")
     fi
 fi
 
